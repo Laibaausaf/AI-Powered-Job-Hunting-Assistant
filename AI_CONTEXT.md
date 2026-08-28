@@ -1,6 +1,6 @@
-# AI Career Manager — Shared AI Context
+# AI CONTEXT — AI-Powered Job Hunting Assistant
 
-## 1. Project Identity
+## 1. PROJECT IDENTITY
 
 Project Name:
 AI-Powered Job Hunting Assistant
@@ -8,257 +8,398 @@ AI-Powered Job Hunting Assistant
 Repository:
 AI-Powered-Job-Hunting-Assistant
 
-This is a collaborative AI-powered job hunting platform being developed by a team of three.
+Repository URL:
+https://github.com/Laibaausaf/AI-Powered-Job-Hunting-Assistant
 
-The project is an MVP for a hackathon.
+Project Type:
+Hackathon MVP / Full-stack AI career platform
 
----
+Team:
+3 members
 
-## 2. Core Purpose
+Current development focus:
+Backend + Database + AI foundation
 
-The platform acts as an intelligent career assistant for job seekers.
-
-The user should be able to move through the complete job-search journey from one platform:
-
-Discover Jobs
-→ Understand Job Fit
-→ Improve Resume
-→ Prepare Application
-→ Prepare for Interview
-→ Track Applications
-→ Understand Job Search Progress
-
-The product should feel like a helpful recruitment/career manager rather than a collection of disconnected AI tools.
+Frontend:
+Not implemented yet. Frontend will be developed separately.
 
 ---
 
-## 3. MVP Modules
+# 2. PRODUCT PURPOSE
 
-The MVP consists of five major modules:
+The AI-Powered Job Hunting Assistant is designed as a centralized career-management platform.
 
-1. Job Search & Recommendations
-2. Application Assistance
-3. Interview Preparation
-4. Application Management
-5. Insights & Analytics
+The goal is not to provide isolated AI utilities.
 
----
+The goal is to guide a job seeker through the complete job-search workflow:
 
-## 4. Development Priority
+Discover
+→ Understand
+→ Tailor
+→ Prepare
+→ Apply
+→ Track
+→ Analyze
 
-The project is being developed in this order:
-
-1. Backend foundation
-2. Database
-3. Job data
-4. Job search and filtering
-5. AI job matching
-6. Resume analysis
-7. Application assistance
-8. Interview preparation
-9. Application tracking
-10. Analytics
-11. Frontend integration
-12. Testing
-13. Final UI polish
-14. Deployment
-
-Frontend development will be handled separately by Team Member 3.
+The platform should feel like a personal recruitment/career manager.
 
 ---
 
-## 5. Team Responsibilities
+# 3. IMPORTANT CURRENT REALITY
 
-### Team Member 1 — Backend + Database + Integration
+DO NOT ASSUME THE ORIGINAL PROJECT PLAN IS THE CURRENT IMPLEMENTATION.
 
-Responsibilities:
+The backend has already been implemented.
 
-- FastAPI backend
-- Database design
-- Database implementation
-- Job data management
-- Job search
-- Job filtering
-- Job ranking
-- Application management
-- Analytics calculations
-- API design
-- Backend/frontend integration
-- Overall technical coordination
+Before modifying anything:
 
-### Team Member 2 — AI / ML
+1. Read this file.
+2. Read PROJECT_STATUS.md.
+3. Read backend/README.md.
+4. Read the relevant file in docs/.
+5. Inspect the existing source code.
+6. Preserve existing working architecture unless there is a clear reason to change it.
 
-Responsibilities:
+Do not rebuild the backend from scratch.
 
-- Resume processing
-- Resume analysis
-- Job matching
-- Match score generation
-- Skill-gap analysis
-- Resume improvement suggestions
-- Cover-letter generation
-- Interview question generation
-- Mock interview feedback
-- AI service integration
+Do not replace FastAPI with another framework.
 
-### Team Member 3 — Frontend
+Do not replace SQLite/SQLAlchemy unless explicitly requested.
 
-Responsibilities:
+Do not introduce another ORM.
 
-- Next.js / React frontend
-- UI/UX
-- Landing page
-- Navigation
-- Job search interface
-- Job cards
-- Job details
-- Resume/application interface
-- Interview interface
-- Application dashboard
-- Analytics dashboard
-- Profile interface
-- Frontend API integration
+Do not create duplicate services that already exist.
 
 ---
 
-## 6. Important Architecture Principle
+# 4. CURRENT TECHNOLOGY STACK
 
-The backend is the central application layer.
+Backend:
 
-Frontend communicates with the backend through APIs.
+- Python
+- FastAPI
+- Uvicorn
+- SQLAlchemy
+- SQLite
+- Pydantic
+- Pydantic Settings
 
-AI functionality is accessed through backend services.
+Authentication:
 
-The frontend must never contain private API keys.
+- bcrypt password hashing
+- JWT
+- python-jose
 
-The database must not be directly accessed by the frontend.
+AI:
 
-The AI service must not directly control database state without going through defined backend logic.
+- Anthropic Claude API
+- anthropic Python SDK
+- Configurable Claude model
 
----
+Document processing:
 
-## 7. AI Responsibility vs Normal Application Logic
+- pypdf
+- python-docx
+- python-multipart
 
-Use AI for tasks that require language understanding or generation.
+Environment management:
 
-AI responsibilities include:
+- python-dotenv
+- pydantic-settings
 
-- Understanding resumes
-- Understanding job descriptions
-- Semantic job matching
-- Explaining job match
-- Identifying skill gaps
-- Resume suggestions
-- Cover-letter generation
-- Interview question generation
-- Interview answer evaluation
+Frontend:
 
-Use normal backend logic for deterministic operations.
-
-Normal application logic includes:
-
-- Database CRUD
-- Filtering
-- Sorting
-- Pagination
-- Application status changes
-- Date calculations
-- Follow-up dates
-- Analytics calculations
-- Validation
-- Authentication
-- Authorization
-
-Do not use an LLM for simple deterministic calculations.
+Not implemented yet.
 
 ---
 
-## 8. Job Data
+# 5. CURRENT BACKEND STRUCTURE
 
-The MVP must contain at least 200 job postings.
+backend/
 
-Every job should follow one standardized internal structure regardless of its source.
+    app/
 
-The system should be able to represent jobs from multiple job platforms.
+        routers/
+            analytics.py
+            applications.py
+            auth.py
+            dashboard.py
+            interview.py
+            jobs.py
+            profile.py
 
-Potential sources may include:
+        services/
+            llm_service.py
+            matching.py
+            resume_parser.py
 
-- LinkedIn
-- Indeed
-- Rozee
-- Other legitimate job sources or APIs
+        __init__.py
+        auth.py
+        config.py
+        database.py
+        main.py
+        models.py
+        schemas.py
+        seed_data.py
 
-Live scraping is not a required dependency for the MVP.
-
-A seeded dataset may be used for demonstration.
-
-Job source information must be stored with each job.
-
----
-
-## 9. Job Matching
-
-The system should produce a personalized match score from 0 to 100.
-
-The match should consider relevant information such as:
-
-- Skills
-- Experience
-- Education
-- Job requirements
-- User profile
-
-The result should include an understandable explanation.
-
-The explanation should help the user understand:
-
-- Why the job matches
-- What they already have
-- What they are missing
-- What they could improve
+    .env.example
+    .gitignore
+    README.md
+    requirements.txt
 
 ---
 
-## 10. Application Assistance
+# 6. CURRENT DATABASE MODELS
 
-The application module should support:
+The current database contains:
 
-- Resume input
-- Job description input
-- Skill-gap analysis
-- Resume improvement suggestions
-- Tailored cover-letter generation
-- Editable generated content
+## User
 
-Generated content should be presented as suggestions.
+Stores:
 
-The user remains in control and should be able to edit generated content.
+- id
+- email
+- hashed password
+- full name
+- cached resume text
+- cached extracted skills
+- created timestamp
+
+## Job
+
+Stores:
+
+- id
+- title
+- company
+- location
+- remote status
+- role level
+- salary range
+- description
+- skills
+- posted date
+- source
+
+## Application
+
+Stores:
+
+- id
+- user
+- job
+- status
+- follow-up date
+- cover letter
+- match score
+- skill gaps
+- status history
+- timestamps
+
+## InterviewSession
+
+Stores:
+
+- id
+- user
+- job
+- generated questions
+- creation timestamp
+
+## InterviewAnswer
+
+Stores:
+
+- id
+- interview session
+- question index
+- answer text
+- AI feedback
+- creation timestamp
 
 ---
 
-## 11. Interview Preparation
+# 7. JOB DATA
 
-The interview module should support:
+The current MVP uses a deterministic synthetic seed dataset.
 
-- Job-specific interview questions
-- Technical questions
-- Behavioral questions
-- General questions
-- Mock interview
-- Answer evaluation
-- Actionable feedback
+The dataset contains 250 job postings.
 
-The system should not simply generate random questions.
+Every seeded job has:
 
-Questions should be connected to the selected job and its requirements.
+source = "seed"
+
+The dataset includes roles such as:
+
+- Frontend Developer
+- Backend Developer
+- Full Stack Developer
+- Data Analyst
+- Data Scientist
+- Machine Learning Engineer
+- DevOps Engineer
+- Mobile Developer
+- Product Manager
+- UX Designer
+- QA Engineer
+- Cloud Engineer
+
+The dataset contains local, international, hybrid, on-site and remote examples.
+
+IMPORTANT:
+
+The current system does NOT perform live LinkedIn scraping.
+
+The live job API integration is currently a future/optional feature.
+
+Do not claim that LinkedIn jobs are currently being fetched.
 
 ---
 
-## 12. Application Management
+# 8. CURRENT BACKEND MODULES
 
-Users should be able to save and track jobs.
+## Authentication
 
-Supported application statuses:
+Implemented:
+
+POST /auth/register
+
+POST /auth/login
+
+GET /auth/me
+
+---
+
+## Job Search
+
+Implemented:
+
+GET /jobs/search
+
+GET /jobs/{job_id}
+
+Search supports:
+
+- free-text query
+- location
+- remote-only
+- role level
+- minimum salary
+- posting age
+- result limit
+
+---
+
+## Resume Processing
+
+Implemented:
+
+POST /profile/resume
+
+Supported files:
+
+- PDF
+- DOCX
+- TXT
+
+The parser extracts text and stores the resume text against the user.
+
+Skills are extracted using the current deterministic vocabulary-based matching service.
+
+---
+
+## Job Matching
+
+Implemented.
+
+Match scoring is deterministic and explainable.
+
+Current formula:
+
+matched required skills / total required skills × 100
+
+The matching service also handles common skill aliases.
+
+The LLM is NOT responsible for the numerical score.
+
+---
+
+## Application Assistance
+
+Implemented:
+
+POST /applications/tailor
+
+The service can:
+
+- analyze resume against a job
+- identify skill gaps
+- generate tailored resume bullet suggestions
+- generate a tailored cover letter
+- calculate match score
+- create/update a tracked application for database jobs
+
+---
+
+## Resume Autofill
+
+Implemented:
+
+GET /profile/autofill
+
+Claude extracts:
+
+- name
+- email
+- experience summary
+- skills
+
+The user's stored email is used as the email fallback.
+
+---
+
+## Interview Preparation
+
+Implemented:
+
+POST /interview/generate
+
+POST /interview/answer
+
+GET /interview/session/{session_id}
+
+The system generates job-specific interview questions.
+
+Categories currently include:
+
+- behavioral
+- technical
+- culture_fit
+
+Answer feedback currently includes:
+
+- clarity
+- structure
+- relevance
+- written feedback
+
+---
+
+## Application Tracking
+
+Implemented:
+
+POST /dashboard/applications
+
+GET /dashboard/applications
+
+GET /dashboard/applications/upcoming
+
+PATCH /dashboard/applications/{application_id}
+
+GET /dashboard/summary
+
+Supported statuses:
 
 - Saved
 - Applied
@@ -267,215 +408,270 @@ Supported application statuses:
 - Rejected
 - Closed
 
-Application state must persist in the database.
-
-The system should support follow-up dates.
+Status changes are persisted in SQLite.
 
 ---
 
-## 13. Analytics
+## Analytics
 
-Analytics should be calculated from persistent application data.
+Implemented:
 
-Potential metrics include:
+GET /analytics
 
-- Applications submitted
-- Interviews received
-- Offers received
-- Response rate
-- Average match score
-- Applications by status
+Current analytics include:
 
-Analytics should not be fake hardcoded numbers when real tracked data exists.
+- total applications
+- response rate
+- average time to response
+- status breakdown
+- optional salary benchmark
 
----
-
-## 14. Data Integrity Rules
-
-Do not create duplicate database records unnecessarily.
-
-Do not overwrite user information without confirmation.
-
-Validate user input before storing it.
-
-Validate AI-generated structured output before saving it.
-
-Database relationships must remain consistent.
-
-Deleting one record must not unintentionally destroy unrelated records.
+Analytics are calculated from stored application records.
 
 ---
 
-## 15. Human-Friendly Product Rules
+# 9. AI SERVICE
 
-The product should feel helpful and understandable.
+All Claude API communication is centralized in:
 
-Avoid unnecessary technical terminology in the user interface.
+backend/app/services/llm_service.py
 
-AI-generated recommendations should explain the reason behind them.
+Current AI functions:
 
-Users should be able to edit AI-generated content.
+1. Generate tailored resume bullet suggestions
+2. Generate cover letters
+3. Extract autofill/profile information
+4. Generate interview questions
+5. Evaluate interview answers
 
-Errors should be understandable to normal users.
+The frontend must never directly access the Anthropic API.
 
-Never expose raw stack traces or internal errors to users.
-
-Empty states should provide helpful next actions.
-
-Loading states should be clear.
-
-The platform should guide users instead of making them figure out what to do next.
+The backend is responsible for AI calls.
 
 ---
 
-## 16. Development Rules
+# 10. AI VS DETERMINISTIC LOGIC
 
-Before modifying the project:
+Use AI for:
 
-1. Read this file.
+- language understanding
+- resume interpretation
+- generation
+- interview question generation
+- interview feedback
+- cover letters
+- contextual suggestions
+
+Use normal Python/backend logic for:
+
+- database operations
+- filtering
+- sorting
+- pagination
+- authentication
+- authorization
+- status changes
+- date calculations
+- analytics
+- match-score mathematics
+- validation
+
+Do not replace deterministic logic with an LLM unnecessarily.
+
+---
+
+# 11. CURRENT AI MODEL CONFIGURATION
+
+Environment variable:
+
+CLAUDE_MODEL
+
+Current default:
+
+claude-3-5-haiku-20241022
+
+The model is loaded from `.env` through `app/config.py`.
+
+---
+
+# 12. ENVIRONMENT VARIABLES
+
+Required:
+
+ANTHROPIC_API_KEY
+
+Optional/configurable:
+
+CLAUDE_MODEL
+
+JWT_SECRET
+
+JWT_ALGORITHM
+
+JWT_EXPIRE_MINUTES
+
+DATABASE_URL
+
+The real `.env` file must NEVER be committed.
+
+Use `.env.example` as the public template.
+
+---
+
+# 13. LOCAL BACKEND STARTUP
+
+From the repository root:
+
+cd backend
+
+Create environment:
+
+python -m venv .venv
+
+Windows PowerShell:
+
+.venv\Scripts\Activate.ps1
+
+Windows Git Bash:
+
+source .venv/Scripts/activate
+
+Install dependencies:
+
+pip install -r requirements.txt
+
+Create:
+
+backend/.env
+
+using:
+
+backend/.env.example
+
+Fill in the Anthropic API key.
+
+Seed the database:
+
+python -m app.seed_data
+
+Start server:
+
+uvicorn app.main:app --reload
+
+Backend:
+
+http://localhost:8000
+
+Swagger:
+
+http://localhost:8000/docs
+
+Health:
+
+http://localhost:8000/health
+
+---
+
+# 14. FRONTEND INTEGRATION
+
+The frontend must communicate with FastAPI.
+
+The frontend must NOT:
+
+- access SQLite directly
+- access SQLAlchemy directly
+- contain Anthropic API keys
+- implement duplicate backend business logic
+
+Frontend integration should follow:
+
+Frontend
+→ FastAPI
+→ Services
+→ Database / Claude
+
+---
+
+# 15. CURRENT PROJECT STATUS
+
+Implemented:
+
+- Repository foundation
+- Backend structure
+- FastAPI application
+- SQLite database
+- SQLAlchemy models
+- Authentication
+- JWT
+- Password hashing
+- Seed dataset
+- Job search
+- Job filtering
+- Job ranking
+- Deterministic match scoring
+- Resume parsing
+- Claude AI service
+- Application tailoring
+- Cover letter generation
+- Resume bullet suggestions
+- Autofill
+- Interview generation
+- Interview feedback
+- Application tracking
+- Follow-up tracking
+- Analytics
+
+Not implemented:
+
+- Frontend
+- Live LinkedIn integration
+- Live Indeed integration
+- Live Rozee integration
+- Browser extension
+- Production deployment
+- Production-grade authentication
+- Full automated test suite
+- Final UI/UX
+
+---
+
+# 16. DEVELOPMENT RULE FOR AI ASSISTANTS
+
+Before changing code:
+
+1. Read AI_CONTEXT.md.
 2. Read PROJECT_STATUS.md.
-3. Read relevant documentation inside docs/.
+3. Read relevant docs.
 4. Inspect existing code.
-5. Understand existing APIs before changing them.
-6. Do not unnecessarily restructure the project.
-7. Do not introduce a new framework without team agreement.
-8. Do not overwrite another teammate's work.
-9. Keep changes focused on the assigned feature.
-10. Test changes before considering them complete.
+5. Identify the smallest required change.
+6. Explain which files will change.
+7. Implement.
+8. Test.
+9. Update documentation if behavior changed.
+
+Never blindly regenerate the backend.
+
+Never overwrite existing functionality without checking it first.
+
+Never expose secrets.
+
+Never commit `.env`.
+
+Never assume planned functionality is already implemented.
 
 ---
 
-## 17. Git Rules
+# 17. CURRENT DEVELOPMENT PRIORITY
 
-Do not develop directly on main.
+Current priority:
 
-Create a feature branch.
-
-Example:
-
-feature/job-search-api
-
-feature/resume-analysis
-
-feature/interview-ai
-
-feature/application-dashboard
-
-Commit focused changes.
-
-Create a Pull Request before merging into main.
-
-After another feature is merged:
-
-git checkout main
-
-git pull origin main
-
-Then update the working branch if necessary.
-
----
-
-## 18. Environment Variables
-
-Never hardcode API keys.
-
-Never commit the real .env file.
-
-Use .env.example to document required environment variables.
-
-Private credentials must remain local or in the approved deployment environment.
-
----
-
-## 19. Coding Philosophy
-
-Prefer:
-
-- Simple solutions
-- Clear names
-- Small functions
-- Reusable services
-- Explicit validation
-- Understandable code
-- Minimal dependencies
-
-Avoid unnecessary:
-
-- Abstraction
-- Complex design patterns
-- Duplicate code
-- Frameworks
-- Microservices
-- Over-engineering
-
-This is an MVP.
-
-Reliability and clarity are more important than complexity.
-
----
-
-## 20. Current Project State
-
-Phase:
-
-Project Foundation
-
-Current status:
-
-- Repository created
-- Team collaborators added
-- Basic project folders created
-- Shared AI context being created
-
-Core application functionality has not been implemented yet.
-
----
-
-## 21. Important Rule for AI Coding Assistants
-
-Before writing or modifying code:
-
-FIRST:
-Understand the existing project.
-
-SECOND:
-Read the relevant documentation.
-
-THIRD:
-Explain briefly what files will be changed and why.
-
-FOURTH:
-Make the smallest necessary change.
-
-FIFTH:
-Test the change.
-
-SIXTH:
-Report what was changed.
-
-Do not assume that a missing feature means the entire architecture should be redesigned.
-
-Do not delete working code just to replace it with a preferred implementation.
-
-The existing project is the source of truth.
-
----
-
-## 22. MVP Philosophy
-
-The objective is not to build every possible career feature.
-
-The objective is to demonstrate a reliable end-to-end career assistant.
-
-A user should be able to:
-
-Find a job
-→ See why it matches
-→ Identify missing skills
-→ Improve their application
-→ Generate a tailored cover letter
-→ Prepare for an interview
-→ Track the application
-→ See progress through analytics
-
-Every major feature should contribute to this journey.
+1. Verify backend locally
+2. Fix backend issues discovered during testing
+3. Verify every API endpoint
+4. Verify AI calls
+5. Verify database persistence
+6. Integrate frontend
+7. Build final user experience
+8. Perform end-to-end testing
+9. Polish demo
+10. Deploy

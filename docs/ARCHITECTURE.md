@@ -1,69 +1,65 @@
 # System Architecture
 
-## 1. Overview
+## AI-Powered Job Hunting Assistant
 
-The AI-Powered Job Hunting Assistant is a web-based career management platform.
+This document describes the architecture that is currently implemented in the project.
 
-The platform connects job discovery, job matching, application assistance, interview preparation, application tracking, and analytics into one user journey.
+The project is being developed as a full-stack AI-powered career platform.
 
-The system follows a layered architecture:
+The current implementation focuses on the backend, database, and AI services.
 
-Frontend
-↓
-Backend API
-↓
-Application Services
-↓
-Database / AI Services / Job Data
+The frontend will be developed separately and will communicate with the backend through REST APIs.
 
 ---
 
-## 2. High-Level Architecture
+# 1. High-Level Architecture
+
+The platform follows a layered architecture:
 
 ```text
-┌─────────────────────────────────────┐
-│             FRONTEND                │
-│         Next.js / React             │
-│                                     │
-│ Landing Page                        │
-│ Job Search                          │
-│ Job Details                         │
-│ Application Assistant               │
-│ Interview Preparation               │
-│ Application Tracker                 │
-│ Analytics                           │
-│ Profile                             │
-└─────────────────┬───────────────────┘
-                  │
-                  │ HTTP / REST API
-                  ▼
-┌─────────────────────────────────────┐
-│             BACKEND                 │
-│              FastAPI                │
-│                                     │
-│ API Routes                          │
-│ Validation                          │
-│ Business Logic                      │
-│ Application Services                │
-│ Authentication                      │
-└───────────────┬─────────┬───────────┘
-                │         │
-                │         │
-                ▼         ▼
-        ┌────────────┐  ┌──────────────┐
-        │ DATABASE   │  │ AI SERVICES  │
-        │            │  │              │
-        │ Users      │  │ Resume       │
-        │ Jobs       │  │ Matching     │
-        │ Applications│ │ Skill gaps   │
-        │ Interviews │  │ Cover letters│
-        │ Resumes    │  │ Interview AI │
-        └────────────┘  └──────────────┘
-                │
-                ▼
-        ┌────────────────┐
-        │   JOB DATA     │
+                    USER
+                      │
+                      ▼
+              ┌───────────────┐
+              │   FRONTEND    │
+              │   Web Client  │
+              └───────┬───────┘
+                      │
+                 HTTP / REST
+                      │
+                      ▼
+              ┌───────────────┐
+              │    FASTAPI    │
+              │   main.py     │
+              └───────┬───────┘
+                      │
+              ┌───────┴────────┐
+              │                │
+              ▼                ▼
+        ┌───────────┐    ┌────────────┐
+        │  Routers  │    │    Auth    │
+        │           │    │ JWT/Bcrypt │
+        └─────┬─────┘    └────────────┘
+              │
+              ▼
+        ┌──────────────┐
+        │   Services   │
+        ├──────────────┤
+        │ Matching     │
+        │ Resume       │
+        │ LLM / Claude │
+        └──────┬───────┘
+               │
+        ┌──────┴─────────┐
         │                │
-        │ Seeded jobs     │
-        │ External sources│
-        └────────────────┘
+        ▼                ▼
+  ┌─────────────┐  ┌─────────────┐
+  │ SQLAlchemy  │  │ Claude API  │
+  │ ORM         │  │ Anthropic   │
+  └──────┬──────┘  └─────────────┘
+         │
+         ▼
+  ┌─────────────┐
+  │   SQLite    │
+  │  Database   │
+  └─────────────┘
